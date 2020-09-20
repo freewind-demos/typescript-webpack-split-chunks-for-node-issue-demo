@@ -1,13 +1,16 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  entry: './src/entry.tsx',
+  entry: {
+    entry1: './src/entry1.tsx',
+    entry2: './src/entry2.tsx',
+  },
   devtool: "inline-source-map",
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].[contenthash].js'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
@@ -20,6 +23,10 @@ module.exports = {
     }]
   },
   plugins: [
-    new HtmlWebpackPlugin()
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    }
+  }
 }

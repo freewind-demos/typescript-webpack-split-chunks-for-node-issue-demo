@@ -7,3 +7,5 @@ ReactDOM.render(
   <Hello/>,
   document.body
 )
+
+console.log("### entry1");
