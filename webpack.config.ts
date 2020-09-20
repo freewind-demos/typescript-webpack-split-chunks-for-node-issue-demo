@@ -1,32 +1,35 @@
-const path = require('path');
-const webpack = require('webpack');
+import {Configuration} from 'webpack';
+import path from 'path';
 
-module.exports = {
+const config: Configuration = {
   mode: 'development',
+  target: 'node',
   entry: {
-    entry1: './src/entry1.tsx',
-    entry2: './src/entry2.tsx',
+    entry1: './src/entry1.ts',
   },
   devtool: "inline-source-map",
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    umdNamedDefine: false
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
   module: {
     rules: [{
-      test: /\.tsx?$/,
+      test: /\.ts$/,
       loader: 'ts-loader',
       exclude: /node_modules/
     }]
   },
-  plugins: [
-  ],
+  plugins: [],
   optimization: {
     splitChunks: {
       chunks: 'all',
     }
   }
 }
+
+export default config;
+
